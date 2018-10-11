@@ -42,7 +42,7 @@
                     background-color="#FFF6DB"
                     prepend-inner-icon="attach_money"
                     flat
-
+                    color="E6A122"
                     hide-details
                     append-icon=""
                   ></v-select>
@@ -77,6 +77,7 @@
                     hide-details
                     append-icon=""
                     color="#E6A122"
+                    item-avatar="attach_money"
                   ></v-select>
                 </v-flex>
               </v-layout>

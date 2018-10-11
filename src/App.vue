@@ -11,7 +11,7 @@
 
               <v-card-title primary-title>
                 <div id="titletext">
-                  <h3 class="headline mb-0">Global Currency Converter</h3>
+                  <h3 class="headline">Global Currency Converter</h3>
                   <p id="subtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
               </v-card-title>
@@ -23,26 +23,28 @@
                 <v-layout row justify-center>
                 <v-flex xs2>
                   <v-text-field
+                    class="vtext"
                     solo
                     label="Enter amount"
                     height="60px"
                     hide-details
                     flat
-                    class="elevation-6"
                   ></v-text-field>
                 </v-flex>
 
-                <v-flex xs2>
+                <v-flex xs1>
                   <v-select
+                    class="vselect"
                     :items="fiats"
                     value="USD"
-                    height="60px"
+                    height="62px"
                     solo
                     background-color="#FFF6DB"
                     prepend-inner-icon="attach_money"
                     flat
-                    class="elevation-6"
+
                     hide-details
+                    append-icon=""
                   ></v-select>
                 </v-flex>
 
@@ -53,26 +55,28 @@
 
                 <v-flex xs2>
                   <v-text-field
+                    class="vtext"
                     solo
                     label="Enter amount"
                     height="60px"
                     flat
                     hide-details
-                    class="elevation-6"
                   ></v-text-field>
                 </v-flex>
 
-                <v-flex xs2>
+                <v-flex xs1>
                   <v-select
+                    class="vselect"
                     :items="cryptos"
                     value="BTC"
-                    height="60px"
+                    height="62px"
                     solo
                     background-color="#FFF6DB"
                     prepend-inner-icon="attach_money"
                     flat
                     hide-details
-                    class="elevation-6"
+                    append-icon=""
+                    color="#E6A122"
                   ></v-select>
                 </v-flex>
               </v-layout>
@@ -118,6 +122,11 @@ export default {
     margin-left: 60px;
   }
 
+  .headline {
+    font-weight: bold;
+    color: #2C3134;
+  }
+
   #subtext {
     color: rgba(44, 49, 52, 0.5);
   }
@@ -128,10 +137,36 @@ export default {
     width: 100%;
   }
 
+  .vtext {
+    border: 1px solid rgba(44, 49, 52, 0.25);
+    border-right: 0;
+    border-radius: 2px 0px 0px 2px;
+    box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .vselect {
+    box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.1);
+
+  }
+  .theme--light.v-text-field--solo .v-input__slot {
+    border-radius: 0px 2px 2px 0px;
+  }
+
+  .theme--light.v-select .v-select__selections {
+    color: #E6A122;
+  }
+
+  .v-input__slot .theme--light.v-icon {
+    color: #E6A122;
+  }
+
   #resulttext {
     margin-top: 20px;
     text-align: center;
     width: 100%;
     color: rgba(44, 49, 52, 0.5);
   }
+
+
 </style>

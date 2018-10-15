@@ -23,6 +23,8 @@
                 <v-layout row justify-center>
                 <v-flex xs2>
                   <v-text-field
+                    v-model="input1"
+                    type="number"
                     class="vtext"
                     solo
                     label="Enter amount"
@@ -34,9 +36,9 @@
 
                 <v-flex xs1>
                   <v-select
+                    v-model="selectedFiat"
                     class="vselect"
                     :items="fiats"
-                    value="USD"
                     height="62px"
                     solo
                     background-color="#FFF6DB"
@@ -55,6 +57,8 @@
 
                 <v-flex xs2>
                   <v-text-field
+                    v-model="input2"
+                    type="number"
                     class="vtext"
                     solo
                     label="Enter amount"
@@ -66,9 +70,9 @@
 
                 <v-flex xs1>
                   <v-select
+                    v-model="selectedCrypto"
                     class="vselect"
                     :items="cryptos"
-                    value="BTC"
                     height="62px"
                     solo
                     background-color="#FFF6DB"
@@ -83,7 +87,7 @@
               </v-layout>
 
               <div id="resulttext">
-                <p>1 Naira = 00001BTC</p>
+                <p>{{val1}} {{selectedFiat}} = {{val2}} {{selectedCrypto}}</p>
               </div>
             </v-card>
         </v-layout>
@@ -93,7 +97,8 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex'
+import axios from 'axios'
 export default {
   name: 'App',
   data () {
@@ -109,10 +114,54 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js',
-
-      cryptos: ['BTC', 'ETH', 'XRP'],
-      fiats: ['USD', 'EUR', 'PES']
+      //end of vuetify data
+      cryptoRates: [],
+      errors: [],
+      selectedFiat: "USD",
+      selectedCrypto: "BTC",
+      val1: 1,
+      val2: null
     }
+  },
+
+  methods: {
+    
+  },
+
+  computed: {
+    ...mapState([
+      'cryptos',
+      'fiats'
+    ]),
+    input1: {
+      get () {
+        return this.val1
+      },
+      set (val) {
+        this.val1 = val
+        this.val2 = (val / this.cryptoRates[this.selectedCrypto][this.selectedFiat]).toFixed(3) // divide to set val2
+      }
+    },
+    input2: {
+      get () {
+        return this.val2
+      },
+      set (val) {
+        this.val2 = val
+        this.val1 = (val * this.cryptoRates[this.selectedCrypto][this.selectedFiat]).toFixed(3) // multiply to set val1
+      }
+    },
+  },
+
+  created () {
+    axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=' + this.cryptos.join(",") + '&tsyms=' + this.fiats.join(","))
+      .then(response => {
+        this.cryptoRates = response.data
+        console.log(this.cryptoRates)
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
   }
 }
 </script>
@@ -146,8 +195,12 @@ export default {
     border-right: 0;
     border-radius: 2px 0px 0px 2px;
     box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.1);
-
   }
+  input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
 
   .vselect {
     box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.1);

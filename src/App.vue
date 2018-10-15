@@ -2,9 +2,9 @@
   <v-app style="background: #FFF6DB">
     <v-content >
       <v-container fluid fill-height>
-        <v-layout align-center>
-          <v-flex xs12 sm6 offset-sm3>
+        <v-layout align-center justify-center>
             <v-card
+            
             class="elevation-20"
             height="650px"
             width="1040px">
@@ -86,7 +86,6 @@
                 <p>1 Naira = 00001BTC</p>
               </div>
             </v-card>
-          </v-flex>
         </v-layout>
       </v-container>
     </v-content>
@@ -119,6 +118,10 @@ export default {
 </script>
 
 <style>
+  html {
+    overflow-y: auto;
+  }
+
   #titletext {
     margin-left: 60px;
   }

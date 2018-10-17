@@ -260,6 +260,7 @@ export default {
 
   .vselect {
     box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.1);
+    min-width: 80px;
 
   }
   .theme--light.v-text-field--solo .v-input__slot {

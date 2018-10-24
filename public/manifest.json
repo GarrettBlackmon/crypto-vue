@@ -41,6 +41,6 @@
  ],
  "start_url": "/?utm_source=homescreen",
  "background_color": "#FFF6DB",
- "Theme_color": "#E6A122",
+ "theme_color": "#E6A122",
  "display": "fullscreen"
 }

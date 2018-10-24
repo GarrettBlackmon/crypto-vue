@@ -37,10 +37,17 @@
    "sizes": "192x192",
    "type": "image\/png",
    "density": "4.0"
-  }
+  },
+  {
+    "src": "\/splash512x512.png",
+    "sizes": "512x512",
+    "type": "image\/png",
+    "density": "4.0"
+   }
  ],
  "start_url": "/?utm_source=homescreen",
  "background_color": "#FFF6DB",
  "theme_color": "#E6A122",
- "display": "fullscreen"
+ "display": "fullscreen",
+ "orientation": "portrait"
 }

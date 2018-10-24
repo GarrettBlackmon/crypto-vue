@@ -57,7 +57,8 @@
                 <v-layout row justify-center>
                 <v-flex xs5>
                   <v-text-field
-                    v-model="input1"
+                    v-model="value1"
+                    @input="update2"
                     type="number"
                     class="vtext"
                     solo
@@ -71,6 +72,7 @@
                 <v-flex xs2>
                   <v-select
                     v-model="selectedFiat"
+                    @change="update2"
                     class="vselect"
                     :items="fiats"
                     height="62px"
@@ -95,7 +97,8 @@
 
                 <v-flex xs5>
                   <v-text-field
-                    v-model="input2"
+                    v-model="value2"
+                    @input="update1"
                     type="number"
                     class="vtext"
                     solo
@@ -109,6 +112,7 @@
                 <v-flex xs2>
                   <v-select
                     v-model="selectedCrypto"
+                    @change="update1"
                     class="vselect"
                     :items="cryptos"
                     height="62px"
@@ -124,8 +128,8 @@
                 </v-flex>
               </v-layout>
 
-              <div id="resulttext" v-if="val1 && val2">
-                <p>{{val1}} {{selectedFiat}} = {{val2}} {{selectedCrypto}}</p>
+              <div id="resulttext" v-if="value1 && value2">
+                <p>{{value1}} {{selectedFiat}} = {{value2}} {{selectedCrypto}}</p>
               </div>
             </v-card>
 
@@ -166,13 +170,26 @@ export default {
       errors: [],
       selectedFiat: "USD",
       selectedCrypto: "BTC",
-      val1: null,
-      val2: null
+      value1: null,
+      value2: null
     }
   },
 
   methods: {
-    
+    update1() {
+      if(this.value2){
+        this.value1 = (this.value2 * this.cryptoRates[this.selectedCrypto][this.selectedFiat]).toFixed(2)
+      }else{
+        this.value1 = null
+      }
+    },
+    update2() {
+      if(this.value1){
+          this.value2 = (this.value1 / this.cryptoRates[this.selectedCrypto][this.selectedFiat]).toFixed(5)
+        }else{
+          this.value2 = null
+        }
+    }
   },
 
   computed: {
@@ -180,32 +197,6 @@ export default {
       'cryptos',
       'fiats'
     ]),
-    input1: {
-      get () {
-        return this.val1
-      },
-      set (val) {
-        if(val) {
-        this.val1 = val
-        this.val2 = (val / this.cryptoRates[this.selectedCrypto][this.selectedFiat]).toFixed(5) // divide to set val2
-        }else{
-          this.val2 = null
-        }
-      }
-    },
-    input2: {
-      get () {
-        return this.val2
-      },
-      set (val) {
-        if(val) {
-        this.val2 = val
-        this.val1 = (val * this.cryptoRates[this.selectedCrypto][this.selectedFiat]).toFixed(2) // multiply to set val1
-        }else{
-          this.val1 = null
-        }
-      }
-    },
   },
 
   created () {

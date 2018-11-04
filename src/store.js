@@ -8,12 +8,21 @@ export default new Vuex.Store({
     cryptos: [
       'BTC',
       'ETH',
-      'XRP'
+      'XRP',
+      'BCH',
+      'EOS',
+      'ADA',
+      'LTC',
+      'XLM',
+      'IOTA',
+      'NEO'
     ],
     fiats: [
       'USD',
       'EUR',
-      'CAD']
+      'GHS',
+      'ZAR',
+      'NGN']
   },
   mutations: {},
   actions: {},

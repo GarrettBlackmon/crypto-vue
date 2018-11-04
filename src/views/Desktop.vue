@@ -49,7 +49,13 @@
                     color="E6A122"
                     hide-details
                     append-icon=""
-                  ></v-select>
+                  >
+                  
+                  
+
+                  
+                  
+                  </v-select>
                 </v-flex>
 
                 <v-flex xs1 class="text-xs-center">
